@@ -172,6 +172,7 @@ export function ChatWindow(props: {
   emoji?: string;
   showIngestForm?: boolean;
   showIntermediateStepsToggle?: boolean;
+  onToolCall?: (toolCall: any) => Promise<any>;
 }) {
   const [showIntermediateSteps, setShowIntermediateSteps] = useState(
     !!props.showIntermediateStepsToggle,
@@ -185,6 +186,7 @@ export function ChatWindow(props: {
 
   const chat = useChat({
     api: props.endpoint,
+    onToolCall: props.onToolCall,
     onResponse(response) {
       const sourcesHeader = response.headers.get("x-sources");
       const sources = sourcesHeader
